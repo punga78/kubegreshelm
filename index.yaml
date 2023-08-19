@@ -9,6 +9,33 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-08-19T13:06:41.8264845+02:00"
+    description: Kubernetes operator allowing to deploy one or many clusters of PostgreSql
+      instances with data replication and failover enabled out-of-the box
+    digest: da96f7bca608094260b114c30f26d1a2174b2bbf4d5fc09c118ea78562bc255a
+    home: https://www.pzetatouch.it
+    icon: https://www.kubegres.io/includes/img/kubegresLogo.png
+    keywords:
+    - kubegres
+    - postgres
+    kubeVersion: '>= 1.20.0-0'
+    maintainers:
+    - name: Luca Zanni
+    name: kubegres
+    sources:
+    - https://github.com/punga78/kubegreshelm
+    type: application
+    urls:
+    - kubegres-0.1.2.tgz
+    version: 0.1.2
+  - annotations:
+      artifacthub.io/changes: |
+        - "helm: Fix opentelemetry module installation for daemonset (#9792)"
+        - "Update charts/* to keep project name display aligned (#9931)"
+        - "Update Ingress-Nginx version controller-v1.8.0"
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-08-19T11:46:51.6631488+02:00"
     description: Kubernetes operator allowing to deploy one or many clusters of PostgreSql
       instances with data replication and failover enabled out-of-the box
@@ -38,4 +65,4 @@ entries:
     urls:
     - kubegres-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-19T11:46:51.6636862+02:00"
+generated: "2023-08-19T13:06:41.8264845+02:00"
