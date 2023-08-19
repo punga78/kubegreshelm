@@ -1,0 +1,58 @@
+# Default values for kubegres.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 3
+
+image:
+  repository: postgres
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "15.4-alpine3.18"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  enabled: false
+  type: LoadBalancer
+  port: 5432
+
+database:
+  size: 15Gi
+
+superUserPassword: postgresSuperUserPsw
+replicationUserPassword: postgresReplicaPsw
+
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+     cpu: 1
+     memory: 3Gi
+  requests:
+     cpu: 1
+     memory: 1Gi
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
