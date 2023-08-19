@@ -25,10 +25,12 @@ spec:
     isDisabled: false
 #   promotePod: "mypostgres-2-0"
 
-{{- if .Values.backup.enabled -}}
+{{if .Values.backup.enabled }}
   backup:
-{{- toYaml .Values.backup | nindent 4 }}
-{{- end }}
+    schedule: "{{ .Values.backup.schedule }}"
+    pvcName: {{ .Release.Name }}-bk
+    volumeMount: "/var/lib/backup"
+{{ end }}
 
   securityContext:
 {{- toYaml .Values.securityContext | nindent 4 }}
