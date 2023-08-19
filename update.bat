@@ -1,4 +1,6 @@
-del .cr-release-packages/*
+del .\.cr-release-packages\*.* /F /Q
+pause
+
 git pull
 
 git add -A
