@@ -65,7 +65,7 @@ maintainers: # (optional)
 
 #annotations:
 #  example: A list of annotations keyed by name (optional).
-- annotations:
+annotations:
   artifacthub.io/changes: |
     - "helm: Fix opentelemetry module installation for daemonset (#9792)"
     - "Update charts/* to keep project name display aligned (#9931)"
