@@ -31,7 +31,7 @@ kubeVersion: ">= 1.20.0-0"
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.1
+version: 0.1.2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -45,7 +45,7 @@ keywords:
     - kubegres
     - postgres
 urls:
-    - https://github.com/punga78/kubegreshelm/releases/download/kubegres-0.1.1/kubegres-0.1.1.tgz
+    - https://github.com/punga78/kubegreshelm/releases/download/kubegres-0.1.2/kubegres-0.1.2.tgz
 #sources:
 #dependencies: # A list of the chart requirements (optional)
 #  - name: The name of the chart (nginx)
@@ -58,7 +58,7 @@ urls:
 #      - ImportValues holds the mapping of source values to parent key to be imported. Each item can be a string or pair of child/parent sublist items.
 #    alias: (optional) Alias to be used for the chart. Useful when you have to add the same chart multiple times
 maintainers: # (optional)
-  - name: Luca Zanni
+  - name: "Luca Zanni"
     #email: info@pzeta.it
 #    url: A URL for the maintainer (optional for each maintainer)
 #deprecated: Whether this chart is deprecated (optional, boolean)

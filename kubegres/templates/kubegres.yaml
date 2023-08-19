@@ -1,45 +1,103 @@
 apiVersion: kubegres.reactive-tech.io/v1
 kind: Kubegres
 metadata:
-  name: postgres-{{ include "kubegres.fullname" . }}
-  namespace: {{ .Release.Name }}
+  name: {{ .Release.Name }}-db
+  namespace: {{ .Release.Namespace }}
   annotations:
-    imageregistry: "https://hub.docker.com/"
-    nginx.ingress.kubernetes.io/affinity: cookie
+   {{- toYaml .Values.podAnnotations | nindent 4 }}
+  labels:
+    {{- include "kubegres.labels" . | nindent 4 }}
+
 spec:
+
    replicas: {{ .Values.replicaCount }}
    image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
    imagePullPolicy: {{ .Values.image.pullPolicy }}
    port: {{ .Values.service.port }}
 
-   database:
-      size: {{ .Values.database.size }}
-      storageClassName: local-storage
-      volumeMount: /var/lib/postgresql/data
-     
-   customConfig: postgres-config
+   #imagePullSecrets:
+   #   - name: my-private-docker-repo-secret
+  database:
+    size: {{ .Values.database.size }}
+    storageClassName: local-storage
+    volumeMount: /var/lib/postgresql/data
 
-   resources:
-      {{- toYaml .Values.resources | nindent 12 }}
-   probe:
-      livenessProbe:
-         exec:
-            command:
-              - sh
-              - -c
-              - exec pg_isready -U postgres -h $POD_IP
+  customConfig: {{ .Values.customConfigName }}
+
+  failover:
+    isDisabled: false
+   #   promotePod: "mypostgres-2-0"
+
+{{- if .Values.backup.enabled -}}
+  backup:
+{{- toYaml .Values.backup | nindent 4 }}
+{{- end }}
+
+  securityContext:
+{{- toYaml .Values.securityContext | nindent 4 }}
+
+  resources:
+{{- toYaml .Values.resources | nindent 4 }}
+
+   # scheduler:
+   #    affinity:
+   #       podAntiAffinity:
+   #          preferredDuringSchedulingIgnoredDuringExecution:
+   #             - weight: 100
+   #               podAffinityTerm:
+   #                  labelSelector:
+   #                     matchExpressions:
+   #                       - key: app
+   #                         operator: In
+   #                         values:
+   #                         - postgres-name
+   #                  topologyKey: "kubernetes.io/hostname"
+   #    tolerations:
+   #       - key: group
+   #         operator: Equal
+   #         value: critical
+
+   # volume:
+   #    volumes:
+   #       - name: dshm
+   #         emptyDir:
+   #           medium: Memory
+   #           sizeLimit: "600Mi"
+
+   #    volumeMounts:
+   #       - mountPath: /dev/shm
+   #         name: dshm
+   #       - mountPath: /dev/anything
+   #         name: anyMount
+
+   #    volumeClaimTemplates:
+   #       name: anyMount
+   #       spec:
+   #          accessModes: [ "ReadWriteOnce" ]
+   #          storageClassName: standard
+   #          resources:
+   #            requests:
+   #              storage: 1Gi
+
+  probe:
+    livenessProbe:
+      exec:
+         command:
+            - sh
+            - -c
+            - exec pg_isready -U postgres -h $POD_IP
          failureThreshold: 10
          initialDelaySeconds: 60
          periodSeconds: 20
          successThreshold: 1
          timeoutSeconds: 15
 
-      readinessProbe:
-         exec:
-            command:
-              - sh
-              - -c
-              - exec pg_isready -U postgres -h $POD_IP
+     readinessProbe:
+      exec:
+         command:
+            - sh
+            - -c
+            - exec pg_isready -U postgres -h $POD_IP
          failureThreshold: 3
          initialDelaySeconds: 5
          periodSeconds: 5
@@ -50,11 +108,11 @@ spec:
       - name: POSTGRES_PASSWORD
         valueFrom:
            secretKeyRef:
-              name: postgres-secret
+              name: {{ include "kubegres.fullname" . }}-secret
               key: superUserPassword
 
       - name: POSTGRES_REPLICATION_PASSWORD
         valueFrom:
            secretKeyRef:
-              name: postgres-secret
+              name: {{ include "kubegres.fullname" . }}-secret
               key: replicationUserPassword

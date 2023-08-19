@@ -9,15 +9,14 @@ Helm's [documentation](https://helm.sh/docs) to get started.
 
 Once Helm has been set up correctly, add the repo as follows:
 
-  helm repo add <alias> https://punga78.github.io/kubegreshelm
+  helm repo add kubegres https://raw.githubusercontent.com/punga78/kubegreshelm/main/
 
 If you had already added this repo earlier, run `helm repo update` to retrieve
-the latest versions of the packages.  You can then run `helm search repo
-<alias>` to see the charts.
+the latest versions of the packages.  You can then run `helm search repo kubegres` to see the charts.
 
 To install the kubegres chart:
 
-    helm install my-kubegres <alias>/kubegres
+    helm install my-kubegres kubegres/kubegres
 
 To uninstall the chart:
 

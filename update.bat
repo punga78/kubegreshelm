@@ -1,8 +1,8 @@
-git pull
+#git pull
 
 git add -A
 
-git commit -m "update"
+git commit -m "update 0.2"
 git push -u origin main
 
 pause
