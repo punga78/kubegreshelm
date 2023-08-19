@@ -1,5 +1,9 @@
 ## Usage
 
+The installation needs to be done once. Run the following command in a Kubernetes cluster:
+
+    kubectl apply -f https://raw.githubusercontent.com/reactive-tech/kubegres/v1.16/kubegres.yaml
+
 [Helm](https://helm.sh) must be installed to use the charts.  Please refer to
 Helm's [documentation](https://helm.sh/docs) to get started.
 

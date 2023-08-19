@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  kubegres:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-08-19T11:16:30.9425709+02:00"
+    description: A Helm chart for Kubernetes
+    digest: ab21964ec60c9a807d6b789f431bae7da6669261f8d3d74d655621b8bad90eb7
+    name: kubegres
+    type: application
+    urls:
+    - kubegres-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-08-19T11:16:30.9425709+02:00"

@@ -1,6 +1,16 @@
 apiVersion: v2
 name: kubegres
-description: A Helm chart for Kubernetes
+description:  Kubernetes operator allowing to deploy one or many clusters of PostgreSql instances with data replication and failover enabled out-of-the box
+
+#home: The URL of this projects home page (optional)
+home: https://www.pzetatouch.it
+
+#  - A list of URLs to source code for this project (optional)
+sources:
+  - https://github.com/punga78/kubegreshelm
+
+#icon: A URL to an SVG or PNG image to be used as an icon (optional).
+icon: https://www.kubegres.io/includes/img/kubegresLogo.png
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -12,22 +22,31 @@ description: A Helm chart for Kubernetes
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
 
+# The optional kubeVersion field can define semver constraints on supported Kubernetes versions.
+# Helm will validate the version constraints when installing the chart and fail if the cluster
+# runs an unsupported Kubernetes version.
+# kubeVersion: A SemVer range of compatible Kubernetes versions (optional)
+kubeVersion: ">= 1.20.0-0"
+
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.0
+version: 0.1.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
+#appVersion: The version of the app that this contains (optional). Needn't be SemVer. Quotes recommended.
 appVersion: "1.16.0"
-# kubeVersion: A SemVer range of compatible Kubernetes versions (optional)
-#keywords:
+
 #  - A list of keywords about this project (optional)
-#home: The URL of this projects home page (optional)
+keywords:
+    - kubegres
+    - postgres
+urls:
+    - https://github.com/punga78/kubegreshelm/releases/download/kubegres-0.1.1/kubegres-0.1.1.tgz
 #sources:
-#  - A list of URLs to source code for this project (optional)
 #dependencies: # A list of the chart requirements (optional)
 #  - name: The name of the chart (nginx)
 #    version: The version of the chart ("1.2.3")
@@ -38,12 +57,17 @@ appVersion: "1.16.0"
 #    import-values: # (optional)
 #      - ImportValues holds the mapping of source values to parent key to be imported. Each item can be a string or pair of child/parent sublist items.
 #    alias: (optional) Alias to be used for the chart. Useful when you have to add the same chart multiple times
-#maintainers: # (optional)
-#  - name: The maintainers name (required for each maintainer)
-#    email: The maintainers email (optional for each maintainer)
+maintainers: # (optional)
+  - name: Luca Zanni
+    #email: info@pzeta.it
 #    url: A URL for the maintainer (optional for each maintainer)
-#icon: A URL to an SVG or PNG image to be used as an icon (optional).
-#appVersion: The version of the app that this contains (optional). Needn't be SemVer. Quotes recommended.
 #deprecated: Whether this chart is deprecated (optional, boolean)
+
 #annotations:
 #  example: A list of annotations keyed by name (optional).
+- annotations:
+  artifacthub.io/changes: |
+    - "helm: Fix opentelemetry module installation for daemonset (#9792)"
+    - "Update charts/* to keep project name display aligned (#9931)"
+    - "Update Ingress-Nginx version controller-v1.8.0"
+  artifacthub.io/prerelease: "false"
