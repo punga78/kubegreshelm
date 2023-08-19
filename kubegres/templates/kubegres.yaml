@@ -19,7 +19,7 @@ spec:
     storageClassName: local-storage
     volumeMount: /var/lib/postgresql/data
 
-  customConfig: {{ .Values.customConfigName }}
+  customConfig: {{ .Release.Name }}-db-config
 
   failover:
     isDisabled: false

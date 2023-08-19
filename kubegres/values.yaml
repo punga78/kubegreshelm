@@ -27,11 +27,10 @@ securityContext: {}
    #    fsGroup: 999
    #    ...
 
-customConfigName: postgres-config
-
 backup:
   enabled: true
   schedule: "* */1 * * *"
+  size: 100Gi
 
 service:
   enabled: true
@@ -40,9 +39,10 @@ service:
 
 database:
   size: 50Gi
-
-superUserPassword: postgresSuperUserPsw
-replicationUserPassword: postgresReplicaPsw
+  name: getea
+  username: getea
+  superUserPassword: postgresSuperUserPsw
+  replicationUserPassword: postgresReplicaPsw
 
 resources: 
   # We usually recommend not to specify default resources and to leave this as a conscious

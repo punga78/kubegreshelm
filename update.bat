@@ -1,8 +1,9 @@
-#git pull
+del .cr-release-packages/*
+git pull
 
 git add -A
 
-git commit -m "update 0.2"
+git commit -m "update 0.5"
 git push -u origin main
 
 pause
